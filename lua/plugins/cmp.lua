@@ -1,14 +1,29 @@
 local cmp = require('cmp')
 local lspkind = require('lspkind')
-local luasnip = require'luasnip'
+local luasnip = require 'luasnip'
 
 cmp.setup {
     autocomplete = false,
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },                -- LSP 👄
+        { name = 'nvim_lua' },                -- nvim lua api
+        { name = 'nvim_lsp_signature_help' }, -- Помощь при введении параметров в методах 🚁
+        { name = 'luasnip' },                 -- Luasnip 🐌
+        { name = 'path' },                    -- Пути 🪤
+        { name = "emoji" },                   -- Эмодзи 😳
+    }, {}),
     formatting = {
         format = lspkind.cmp_format({
-            mode = 'symbol',       -- show only symbol annotations
-            maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+            -- show only symbol annotations
+            mode = 'symbol',
+
+            -- prevent the popup from showing more
+            -- than provided characters (e.g 50 will not show more than 50 characters)
+            maxwidth = 50,
+
+            -- when popup menu exceed maxwidth, the truncated part
+            -- would show ellipsis_char instead (must define maxwidth first)
+            ellipsis_char = '...',
         })
     },
     snippet = {
@@ -58,18 +73,4 @@ cmp.setup {
             end
         end, { "i", "s" }),
     },
-
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },                -- LSP 👄
-        { name = 'nvim_lsp_signature_help' }, -- Помощь при введении параметров в методах 🚁
-        { name = 'luasnip' },                 -- Luasnip 🐌
-        -- { name = 'buffer' },                  -- Буфферы 🐃
-        { name = 'path' },                    -- Пути 🪤
-        { name = "emoji" },                   -- Эмодзи 😳
-        { name = 'nvim_lsp_signature_help' },
-    }, {
-    }),
 }
-
-
-require("luasnip/loaders/from_vscode").lazy_load()

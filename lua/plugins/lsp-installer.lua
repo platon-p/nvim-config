@@ -23,7 +23,7 @@ local servers = {
 
     'nginx_language_server',
     --'docker_compose_language_service',
-    "yamlls",
+    "yamlls", "taplo"
 }
 
 vim.filetype.add {
@@ -37,6 +37,12 @@ lspconfig.omnisharp.setup {
         semanticTokensProvider = nil,
     }
 }
+
+lspconfig.kotlin_language_server.setup {
+    cmd = { "/Users/bibbob/tmp/kotlin-language-server/server/build/install/server/bin/kotlin-language-server" },
+    capabilities = capabilities,
+}
+
 lspconfig.matlab_ls.setup {
     cmd = { "node", "/Users/bibbob/tmp/MATLAB-language-server/out/index.js", "--stdio" },
     capabilities = cmp_lsp.default_capabilities(),
