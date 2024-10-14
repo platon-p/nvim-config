@@ -1,15 +1,12 @@
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = {
-        "cpp", "c_sharp", "java", "go", "kotlin", "lua", "python",
-        "javascript", "typescript",
-        "sql",
-        "html", "css", "csv", "json", "xml", "yaml",
-        "gitignore",
-        "dockerfile",
-        "matlab"
-    },
-    auto_install = "true",
-    highlight = {
-        enable = true,
-    }
+return {
+    'nvim-treesitter/nvim-treesitter',
+    build = ":TSUpdate",
+    config = function()
+        local configs = require 'nvim-treesitter.configs'
+        configs.setup {
+            highlight = { enable = true },
+            indent = { enable = true },
+            auto_install = true,
+        }
+    end
 }
