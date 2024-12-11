@@ -4,7 +4,7 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
-]]--
+]] --
 --[[
 local postfix = require("luasnip.extras.postfix").postfix
 
@@ -96,7 +96,12 @@ for k_, v in pairs(mySnippets) do
         ls.add_snippets(lang, v)
     end
 end
-]]--
+]] --
 return {
     'L3MON4D3/LuaSnip',
+    dependencies = { "rafamadriz/friendly-snippets" },
+    config = function()
+        require("luasnip").setup {}
+        require("luasnip.loaders.from_vscode").lazy_load()
+    end
 }

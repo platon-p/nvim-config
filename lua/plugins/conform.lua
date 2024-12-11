@@ -1,19 +1,28 @@
 return {
     'stevearc/conform.nvim',
-    cmd = {"ConformInfo"},
+    lazy = false,
+    cmd = { "ConformInfo" },
     keys = {
         {
-            "<leader>f",
+            "gf",
             function()
-                require 'conform'.format({ async = true })
+                require("conform").format({ async = true, timeout_ms = 200 })
             end,
-            mode = ''
         }
     },
     opts = {
+        log_level = vim.log.levels.DEBUG,
         formatters_by_ft = {
             python = { 'isort', 'black' },
-            s = { "asm_fmt"}
+            asm = { "asmfmt" },
+            go = { "goimports", lsp_format = "first" },
+            typst = { "typstfmt" },
+            typescriptreact = { "prettier", lsp_format = "first" },
+            js = { "prettier" },
+            ts = { "prettier" },
+        },
+        default_format_opts = {
+            lsp_format = "prefer"
         },
     },
 }

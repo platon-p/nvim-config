@@ -4,6 +4,11 @@ return {
         "nvim-tree/nvim-web-devicons"
     },
     opts = {
-        renderer = { group_empty = true }
+        renderer = {
+            group_empty = true,
+            indent_markers = {
+                enable = true
+            },
+        }
     }
 }

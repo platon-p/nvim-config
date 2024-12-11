@@ -3,27 +3,30 @@ return {
         -- LSP SERVER MANAGEMENT
         "williamboman/mason.nvim",
         dependencies = "nvim-lspconfig",
-        config = true
+        config = true,
+        opts = {
+            ensure_installed = {
+                -- markup
+                "jsonls", "taplo", "yamlls", "marksman",
+
+                "gopls", "rust_analyzer",
+                "lua_ls",
+                "ts_ls",
+            }
+        }
     },
     {
         "williamboman/mason-lspconfig.nvim",
         dependencies = { "mason.nvim" },
         config = function()
-            local lspconfig = require 'lspconfig'
+            local lspconfig = require("lspconfig")
             local mason_lspconfig = require("mason-lspconfig")
             -- Can't auto-install these as there is no mappings in mason-lspconfig.
             -- ◍ goimports
             -- ◍ goimports-reviser
             -- ◍ golangci-lint
 
-            mason_lspconfig.setup({
-                ensure_installed = {
-                    "gopls", "jsonls",
-                    "lua_ls", "marksman",
-                    "rust_analyzer", "taplo", "ts_ls",
-                    "yamlls"
-                }
-            })
+            mason_lspconfig.setup()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
 
             capabilities.textDocument.completion.completionItem.snippetSupport = true

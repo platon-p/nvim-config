@@ -1,6 +1,4 @@
-require('base')
-require('tabs')
-require('appearance')
-require('keys/main')
-
+vim.g.mapleader = ','
+require('options')
+require('keymaps')
 require('config.lazy')
