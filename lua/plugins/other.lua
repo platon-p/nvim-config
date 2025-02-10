@@ -1,5 +1,8 @@
 return {
     "wakatime/vim-wakatime",
+    {
+        "editorconfig/editorconfig-vim",
+    },
     "David-Kunz/gen.nvim",
     "meain/vim-jsontogo",
     {

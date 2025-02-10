@@ -2,6 +2,7 @@ local opt = vim.opt
 require("fold")
 
 -----
+vim.g.editorconfig = true
 
 opt.mouse = 'a'
 opt.encoding = 'utf-8'
@@ -10,7 +11,6 @@ opt.ignorecase = true -- Ignore case
 opt.smartcase = true -- Don't ignore case with capitals
 
 ----- tabs -----
-
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
