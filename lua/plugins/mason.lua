@@ -29,17 +29,23 @@ return {
       mason_lspconfig.setup()
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
+      local servers = mason_lspconfig.get_installed_servers()
 
-      mason_lspconfig.setup_handlers {
-        function(server_name)
-          lspconfig[server_name].setup {
-            capabilities = capabilities,
-            on_init = function(client, _)
-              client.server_capabilities.semanticTokensProvider = nil -- turn off semantic tokens
-            end
-          }
-        end
-      }
+      local ignore = function(server_name) end
+
+      local setup = function(server_name)
+        lspconfig[server_name].setup {
+          capabilities = capabilities,
+          on_init = function(client, _)
+            client.server_capabilities.semanticTokensProvider = nil -- turn off semantic tokens
+          end
+        }
+      end
+
+
+      for i, v in ipairs(servers) do
+        setup(v)
+      end
     end
   },
 }

@@ -1,14 +1,14 @@
 return {
   'hrsh7th/nvim-cmp',
   dependencies = {
-    'hrsh7th/cmp-path',     -- source for system paths
-    'hrsh7th/cmp-emoji',    -- emoji
-    'hrsh7th/cmp-nvim-lua', -- nvim lua api
+    'hrsh7th/cmp-nvim-lua',     -- nvim lua api
     'hrsh7th/cmp-nvim-lsp',
-    -- 'hrsh7th/cmp-nvim-lsp-signature-help',
     'saadparwaiz1/cmp_luasnip', -- snippets
 
     'onsails/lspkind-nvim',     -- show kind of completion (function, snippet, ...)
+    -- 'hrsh7th/cmp-nvim-lsp-signature-help',
+    -- 'hrsh7th/cmp-path',     -- source for system paths
+    -- 'hrsh7th/cmp-emoji',    -- emoji
   },
   config = function()
     local cmp = require('cmp')
@@ -21,11 +21,11 @@ return {
       sources = cmp.config.sources({
         { name = 'nvim_lsp' }, -- LSP 👄
         { name = 'nvim_lua' }, -- nvim lua api
-        --{ name = 'nvim_lsp_signature_help' }, -- Помощь при введении параметров в методах 🚁
         { name = 'luasnip' },  -- Luasnip 🐌
-        { name = 'path' },     -- Пути 🪤
-        { name = "emoji" },    -- Эмодзи 😳
         { name = 'lazydev' }
+        -- { name = 'nvim_lsp_signature_help' }, -- Помощь при введении параметров в методах 🚁
+        -- { name = 'path' },     -- Пути 🪤
+        -- { name = "emoji" },    -- Эмодзи 😳
       }, {}),
       sorting = {
         --priority_weight = 0.1,
