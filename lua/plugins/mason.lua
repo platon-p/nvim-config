@@ -6,18 +6,13 @@ return {
     config = true,
     opts = {
       ensure_installed = {
-        -- markup
-        "jsonls", "taplo", "yamlls", "marksman",
-
-        "gopls", "rust_analyzer",
-        "lua_ls",
-        "ts_ls",
       }
     }
   },
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "mason.nvim" },
+    version = "v1.32.0",
     config = function()
       local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
@@ -31,21 +26,26 @@ return {
       capabilities.textDocument.completion.completionItem.snippetSupport = true
       local servers = mason_lspconfig.get_installed_servers()
 
-      local ignore = function(server_name) end
-
-      local setup = function(server_name)
-        lspconfig[server_name].setup {
-          capabilities = capabilities,
-          on_init = function(client, _)
-            client.server_capabilities.semanticTokensProvider = nil -- turn off semantic tokens
-          end
+      lspconfig["gopls"].setup {
+        cmd = { "ya", "tool", "gopls" },
+        capabilities = capabilities,
+        settings = {
+          gopls = {
+            expandWorkspaceToModule = false,
+          }
         }
-      end
+      }
 
-
-      for i, v in ipairs(servers) do
-        setup(v)
-      end
+      mason_lspconfig.setup_handlers {
+        function(server_name)
+          lspconfig[server_name].setup {
+            capabilities = capabilities,
+            on_init = function(client, _)
+              client.server_capabilities.semanticTokensProvider = nil -- turn off semantic tokens
+            end
+          }
+        end
+      }
     end
   },
 }

@@ -27,15 +27,24 @@ opt.cursorline = true
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes:1"
----
 
 vim.diagnostic.config {
   update_in_insert = true,
+  virtual_text = {
+    prefix = "●",
+  },
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "󰋼",
+      [vim.diagnostic.severity.HINT]  = "󰌵",
+    },
+  }
 }
 
-vim.cmd [[let g:gruvbox_invert_selection='0']]
-vim.cmd [[colorscheme gruvbox]]
-
+---
 vim.cmd([[
   augroup CursorShapeFix
     autocmd!

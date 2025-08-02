@@ -1,10 +1,8 @@
 return {
-  "wakatime/vim-wakatime",
   {
-    "editorconfig/editorconfig-vim",
+    "wakatime/vim-wakatime",
+    enabled = false
   },
-  "David-Kunz/gen.nvim",
-  "meain/vim-jsontogo",
   {
     "ray-x/lsp_signature.nvim",
     opts = {
@@ -13,12 +11,29 @@ return {
       hint_enable = false,
     }
   },
+  {
+    "RRethy/vim-illuminate",
+    config = function(opts)
+      require('illuminate').configure(opts)
+
+      vim.defer_fn(function()
+        vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "Visual" })
+        vim.api.nvim_set_hl(0, "IlluminatedWordRead", { link = "Visual" })
+        vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "Visual" })
+      end, 1000)
+    end,
+    opts = {
+      delay = 1,
+    }
+  },
+  "editorconfig/editorconfig-vim",
+  "David-Kunz/gen.nvim",
   { "windwp/nvim-autopairs", opts = {} },
   { "folke/neoconf.nvim",    opts = {}, priority = 1000 },
   { "folke/lazydev.nvim",    opts = {} },
   {
     "folke/persistence.nvim",
-    event = "BufReadPre",     -- this will only start session saving when an actual file was opened
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
     opts = {
       -- add any custom options here
     }

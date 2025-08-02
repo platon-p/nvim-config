@@ -2,3 +2,5 @@
 /plugin
 lazy-lock.json
 lazyvim.json
+after/plugin/lsp.lua
+lua/plugins/yandex_dev.lua
