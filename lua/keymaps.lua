@@ -12,6 +12,11 @@ map("n", '<leader>h', '<cmd>nohlsearch<CR>')
 map("n", '<leader>c', '<cmd>!pbcopy < %<CR><CR>')
 map("n", "<leader>fw", "<cmd>lua vim.diagnostic.open_float()<CR>")
 
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+
+
+
 --nm('<M-Enter>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 --im('<M-Enter>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-

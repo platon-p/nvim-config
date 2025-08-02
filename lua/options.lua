@@ -8,7 +8,7 @@ opt.mouse = 'a'
 opt.encoding = 'utf-8'
 
 opt.ignorecase = true -- Ignore case
-opt.smartcase = true -- Don't ignore case with capitals
+opt.smartcase = true  -- Don't ignore case with capitals
 
 ----- tabs -----
 opt.tabstop = 4
@@ -26,6 +26,28 @@ opt.termguicolors = true
 opt.cursorline = true
 opt.number = true
 opt.relativenumber = true
+opt.signcolumn = "yes:1"
 
-vim.cmd [[let g:gruvbox_invert_selection='0']]
-vim.cmd [[colorscheme gruvbox]]
+vim.diagnostic.config {
+  update_in_insert = true,
+  virtual_text = {
+    prefix = "●",
+  },
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "󰋼",
+      [vim.diagnostic.severity.HINT]  = "󰌵",
+    },
+  }
+}
+
+---
+vim.cmd([[
+  augroup CursorShapeFix
+    autocmd!
+    autocmd VimLeave * set guicursor=a:ver25-blinkon1
+  augroup END
+]])
